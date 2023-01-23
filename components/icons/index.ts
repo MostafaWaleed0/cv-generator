@@ -1,0 +1,10 @@
+export { default as Logo } from './Logo';
+export { default as Facebook } from './Facebook';
+export { default as Twitter } from './Twitter';
+export { default as List } from './List';
+export { default as Arrow } from './Arrow';
+export { default as Phone } from './Phone';
+export { default as Cloud } from './Cloud';
+export { default as Email } from './Email';
+export { default as Location } from './Location';
+export { default as Linkedin } from './Linkedin';

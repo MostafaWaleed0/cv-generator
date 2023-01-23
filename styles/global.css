@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  @apply text-2xl text-base-750;
+}
+
+h1,
+h2,
+h3 {
+  @apply capitalize font-semibold;
+}
+
+h1 {
+  @apply leading-none text-4xl md:text-6xl;
+}
+
+h2 {
+  @apply leading-[1.1] text-4xl md:text-5xl;
+}
+
+h3 {
+  @apply leading-tight  text-4xl;
+}
+
+p {
+  @apply leading-relaxed;
+}
+
+button {
+  @apply font-bold;
+}
+
+.pixel-background {
+  @apply absolute top-0 left-0 w-full h-full bg-[url('/static/images/dot.png')] bg-repeat;
+}
+.datepicker {
+  display: flex;
+  position: relative;
+}
+
+.datepicker > span {
+  font: var(--font-ui);
+  font-weight: 900;
+  font-size: var(--scale-0);
+  color: var(--color-text-light);
+  margin: 0 -0.1em 0 -1.1em;
+  z-index: 1;
+  padding: 7px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  background: #f7f7f7;
+  border-top: 2px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.duration-present {
+  position: absolute;
+  left: -2px;
+  bottom: -163px;
+  background: #fff;
+  width: calc(100% + 4px);
+  height: 47px;
+  border-bottom-right-radius: var(--radius-3);
+  border-bottom-left-radius: var(--radius-3);
+  border-right: 2px solid #f0f0f0;
+  border-left: 2px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1em;
+}
+
+.duration-present label {
+  font-size: 15px !important;
+}
+.duration-present span {
+  font: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--scale-000);
+  color: var(--color-text);
+  padding-left: 8px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1349px) {
+  :global(.duration-present) {
+    right: 0;
+  }
+}
+
+.react-datepicker {
+  @apply !text-base-900 font-medium min-w-[364px] max-w-[364px];
+}
+
+.react-datepicker__year-text {
+  @apply text-lg  px-5 py-1 !w-auto;
+}
+
+.react-datepicker__year-text--selected {
+  @apply !bg-pink-500 !text-base-0;
+}
+
+.react-datepicker__year-wrapper {
+  @apply !grid grid-cols-3 justify-items-center mr-0 w-full !max-w-full;
+}
+
+.react-datepicker__year-text--keyboard-selected {
+  @apply !bg-pink-400 !text-base-900;
+}
+
+.react-datepicker__month-text {
+  @apply text-lg  px-5 py-1 !w-auto;
+}
+
+.react-datepicker__year-text--today {
+  @apply font-normal;
+}
+
+.react-datepicker__month-text--selected {
+  @apply !bg-pink-500 !text-base-0;
+}
+
+.react-datepicker__month-wrapper {
+  @apply !grid grid-cols-3 justify-items-center mr-0 w-full !max-w-full;
+}
+
+.react-datepicker__month-text--keyboard-selected {
+  @apply !bg-pink-400 !text-base-0;
+}
+
+.react-datepicker-wrapper-present-input {
+  position: absolute;
+}
+
+.no-value {
+  color: white;
+}
+
+.fullwidth .react-datepicker-popper .react-datepicker__triangle {
+  left: 170px !important;
+}
+
+.columns-2 {
+  @apply grid grid-cols-2 gap-16 items-end;
+}
+
+input,
+textarea {
+  @apply text-base md:text-xl;
+}
