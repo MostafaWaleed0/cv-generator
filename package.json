@@ -3,10 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "printWidth": 100,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none"
   },
   "dependencies": {
     "@next/font": "13.1.1",
@@ -23,13 +30,6 @@
     "react-hot-toast": "^2.4.0",
     "react-to-print": "^2.14.11",
     "typescript": "4.9.4"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "none",
-    "printWidth": 100
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
