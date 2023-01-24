@@ -5,5 +5,5 @@ export const checkProps = (
   key: keyof ResumeViewType,
   prop: string
 ): boolean => {
-  return obj[key].hasOwnProperty(prop);
+  return Object.prototype.hasOwnProperty.call(obj[key], prop);
 };
