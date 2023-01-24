@@ -250,8 +250,8 @@ const ResumeView: React.FC = () => {
     handleDeleteItem(data, key, _id);
   };
 
-  console.log(data);
-  console.log(values);
+  
+  
 
   const resumeStep = () => {
     switch (step) {
