@@ -20,7 +20,6 @@ const Projects: React.FC<FormType<'projects'>> = ({
           placeholder="Volunteer"
           error={!!errors?.title}
           errorMessage={errors?.title ? errors?.title : ''}
-          autoFocus
         />
         <FormInput
           value={values.organization}

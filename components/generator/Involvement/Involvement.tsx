@@ -18,7 +18,6 @@ const Involvement: React.FC<FormType<'involvement'>> = ({
           require={false}
           onChange={handleChange}
           placeholder="Selected Member"
-          autoFocus
         />
         <FormInput
           value={values.organization}

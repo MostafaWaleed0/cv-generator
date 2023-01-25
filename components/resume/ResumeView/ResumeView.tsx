@@ -197,15 +197,15 @@ const ResumeView: React.FC = () => {
 
   const handleSubmit = (e: { preventDefault: () => void }, key: keyof ResumeViewType) => {
     e.preventDefault();
-    const errors = validate(values);
+    const inputErrors = validate(values);
     const successMassage = 'Your information is saved 😀';
 
-    if (checkErrors(errors, key)) {
+    if (checkErrors(inputErrors, key)) {
       const errorMassage = '❌ Error: The required input must be filled in';
       return (
         setErrors((prev) => ({
           ...prev,
-          [key]: errors[key]
+          [key]: inputErrors[key]
         })),
         toast(errorMassage)
       );
@@ -236,22 +236,19 @@ const ResumeView: React.FC = () => {
       : null;
   };
 
-  const handleDeleteItem = (data: DataType, key: keyof DataType, _id: string) =>
+  const handleDeleteItem = (_data: DataType, key: keyof DataType, _id: string) =>
     setData((prev) => ({
       ...prev,
-      [key]: [...(data[key] as [])].filter(({ id }) => id !== _id)
+      [key]: [...(_data[key] as [])].filter(({ id }) => id !== _id)
     }));
 
-  const handleEditItem = (data: DataType, key: keyof DataType, _id: string) => {
-    const findIndex = (data[key] as []).findIndex(({ id }) => id === _id);
-    const filterData = { ...(data[key] as []) }[findIndex];
+  const handleEditItem = (_data: DataType, key: keyof DataType, _id: string) => {
+    const findIndex = (_data[key] as []).findIndex(({ id }) => id === _id);
+    const filterData = { ...(_data[key] as []) }[findIndex];
 
     setValues((prev) => ({ ...prev, [key]: filterData }));
-    handleDeleteItem(data, key, _id);
+    handleDeleteItem(_data, key, _id);
   };
-
-  
-  
 
   const resumeStep = () => {
     switch (step) {
