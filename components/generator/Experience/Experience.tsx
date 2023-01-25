@@ -18,7 +18,6 @@ const Experience: React.FC<FormType<'experience'>> = ({
           require={false}
           onChange={handleChange}
           placeholder="Journalistic"
-          autoFocus
         />
         <FormInput
           value={values.company}

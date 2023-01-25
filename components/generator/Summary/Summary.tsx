@@ -11,7 +11,6 @@ const Summary: React.FC<FormType<'summary'>> = ({ values, handleChange, handleSu
         label="add your skills"
         require={false}
         onChange={handleChange}
-        autoFocus
       />
       <button
         onClick={(e) => handleSubmit(e, 'summary')}
