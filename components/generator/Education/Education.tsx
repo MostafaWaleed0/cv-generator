@@ -20,7 +20,6 @@ const Education: React.FC<FormType<'education'>> = ({
           placeholder="Bachelor of Arts in English Language and Literature"
           error={!!errors?.qualification}
           errorMessage={errors?.qualification ? errors?.qualification : ''}
-          autoFocus
         />
         <FormInput
           value={values.institution}

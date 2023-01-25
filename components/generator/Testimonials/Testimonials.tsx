@@ -20,7 +20,6 @@ const Testimonials: React.FC<FormType<'testimonials'>> = ({
           error={!!errors?.name}
           errorMessage={errors?.name ? errors?.name : ''}
           placeholder="Project Management Professional (PMP)"
-          autoFocus
         />
         <FormInput
           value={values.department}

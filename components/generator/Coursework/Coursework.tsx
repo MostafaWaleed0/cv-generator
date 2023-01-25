@@ -20,7 +20,6 @@ const Coursework: React.FC<FormType<'coursework'>> = ({
           error={!!errors?.name}
           errorMessage={errors?.name ? errors?.name : ''}
           placeholder="Introduction To Computer Science"
-          autoFocus
         />
         <FormInput
           value={values.institution}

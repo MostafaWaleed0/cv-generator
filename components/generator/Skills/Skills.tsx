@@ -14,7 +14,6 @@ const Skills: React.FC<FormType<'skills'>> = ({ values, errors, handleChange, ha
         error={!!errors?.skill}
         errorMessage={errors?.skill ? errors?.skill : ''}
         placeholder="Soft Skills: Leadership, Teamwork, Time Management"
-        autoFocus
       />
       <button
         onClick={(e) => handleSubmit(e, 'skills')}
