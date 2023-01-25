@@ -68,6 +68,7 @@ export type ResumeViewType = {
   summary: {
     summary: string;
   };
+  finished: {};
 };
 
 export type DataType = {
@@ -80,6 +81,7 @@ export type DataType = {
   involvement: Array<ResumeViewType['involvement']>;
   skills: Array<ResumeViewType['skills']>;
   summary: Partial<ResumeViewType['summary']>;
+  finished: Partial<{}>;
 };
 
 export type HandleChangeType = {
@@ -93,7 +95,7 @@ export type HandleChangeType = {
 export interface FormType<T extends keyof ResumeViewType> extends HandleChangeType {
   values: ResumeViewType[T];
   errors?: Partial<ResumeViewType[T]>;
-  handleSubmit(e: { preventDefault: () => void }, key: keyof ResumeViewType): void;
+  handleSubmit: (e: { preventDefault: () => void }) => string | undefined;
 }
 
 export type ErrorsType = {
@@ -106,4 +108,5 @@ export type ErrorsType = {
   involvement: Partial<ResumeViewType['involvement']>;
   skills: Partial<ResumeViewType['skills']>;
   summary: Partial<ResumeViewType['summary']>;
+  finished: Partial<{}>;
 };
