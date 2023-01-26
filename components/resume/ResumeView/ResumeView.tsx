@@ -12,7 +12,7 @@ import {
 import Resume from 'layouts/Resume';
 import useLocalStorage from 'lib/hooks/useLocalStorage';
 import { DataType, ErrorsType, ResumeViewType } from 'lib/types';
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { checkErrors, checkProps, uniqueid, validate } from 'utils';
 import ItemsList from '../ItemsList';
 import toast, { ToastBar, Toaster } from 'react-hot-toast';
@@ -89,77 +89,81 @@ const ResumeView: React.FC = () => {
     },
     finished: {}
   });
-  const reset: ResumeViewType = {
-    contact: {
-      name: '',
-      email: '',
-      phone: '',
-      job: '',
-      country: '',
-      website: '',
-      city: '',
-      state: '',
-      linkedin: ''
-    },
-    experience: {
-      id: '',
-      role: '',
-      company: '',
-      location: '',
-      end_time: '',
-      start_time: '',
-      details: ''
-    },
-    projects: {
-      id: '',
-      title: '',
-      end_time: '',
-      start_time: '',
-      organization: '',
-      details: ''
-    },
-    education: {
-      id: '',
-      qualification: '',
-      institution: '',
-      location: '',
-      time: '',
-      qpa: ''
-    },
-    testimonials: {
-      id: '',
-      name: '',
-      department: '',
-      time: '',
-      importance: '',
-      relevant: ''
-    },
-    coursework: {
-      id: '',
-      name: '',
-      institution: '',
-      time: '',
-      skill: '',
-      applied_skills: ''
-    },
-    involvement: {
-      id: '',
-      role: '',
-      organization: '',
-      institution: '',
-      end_time: '',
-      start_time: '',
-      details: ''
-    },
-    skills: {
-      id: '',
-      skill: ''
-    },
-    summary: {
-      summary: ''
-    },
-    finished: {}
-  };
+  const reset: ResumeViewType = useMemo(
+    () => ({
+      contact: {
+        name: '',
+        email: '',
+        phone: '',
+        job: '',
+        country: '',
+        website: '',
+        city: '',
+        state: '',
+        linkedin: ''
+      },
+      experience: {
+        id: '',
+        role: '',
+        company: '',
+        location: '',
+        end_time: '',
+        start_time: '',
+        details: ''
+      },
+      projects: {
+        id: '',
+        title: '',
+        end_time: '',
+        start_time: '',
+        organization: '',
+        details: ''
+      },
+      education: {
+        id: '',
+        qualification: '',
+        institution: '',
+        location: '',
+        time: '',
+        qpa: ''
+      },
+      testimonials: {
+        id: '',
+        name: '',
+        department: '',
+        time: '',
+        importance: '',
+        relevant: ''
+      },
+      coursework: {
+        id: '',
+        name: '',
+        institution: '',
+        time: '',
+        skill: '',
+        applied_skills: ''
+      },
+      involvement: {
+        id: '',
+        role: '',
+        organization: '',
+        institution: '',
+        end_time: '',
+        start_time: '',
+        details: ''
+      },
+      skills: {
+        id: '',
+        skill: ''
+      },
+      summary: {
+        summary: ''
+      },
+      finished: {}
+    }),
+    []
+  );
+
   const [errors, setErrors] = useState<ErrorsType>({
     contact: {},
     experience: {},
@@ -186,81 +190,97 @@ const ResumeView: React.FC = () => {
     finished: {}
   });
 
-  const handleChange = (key: keyof ResumeViewType) => {
-    return (e: { target: { name: string; value: string } }, date?: string, customName?: string) => {
-      const { name, value } = e.target;
-      setValues((prev) => ({
-        ...prev,
-        [key]: {
-          ...prev[key],
-          [name ?? customName]: value ?? date
+  const handleChange = useCallback(
+    (key: keyof ResumeViewType) => {
+      return (
+        e: { target: { name: string; value: string } },
+        date?: string,
+        customName?: string
+      ) => {
+        const { name, value } = e.target;
+        setValues((prev) => ({
+          ...prev,
+          [key]: {
+            ...prev[key],
+            [name ?? customName]: value ?? date
+          }
+        }));
+      };
+    },
+    [setValues]
+  );
+
+  const handleSubmit = useCallback(
+    (key: keyof ResumeViewType) => {
+      return (e: { preventDefault: () => void }) => {
+        e.preventDefault();
+        const inputErrors = validate(values);
+        const successMassage = 'Your information is saved 😀';
+
+        if (checkErrors(inputErrors, key)) {
+          const errorMassage = '❌ Error: The required input must be filled in';
+          return (
+            setErrors((prev) => ({
+              ...prev,
+              [key]: inputErrors[key]
+            })),
+            toast(errorMassage)
+          );
         }
-      }));
-    };
-  };
+        toast(successMassage);
 
-  const handleSubmit = (key: keyof ResumeViewType) => {
-    return (e: { preventDefault: () => void }) => {
-      e.preventDefault();
-      const inputErrors = validate(values);
-      const successMassage = 'Your information is saved 😀';
+        setErrors({
+          contact: {},
+          experience: {},
+          projects: {},
+          education: {},
+          testimonials: {},
+          coursework: {},
+          involvement: {},
+          skills: {},
+          summary: {},
+          finished: {}
+        });
 
-      if (checkErrors(inputErrors, key)) {
-        const errorMassage = '❌ Error: The required input must be filled in';
-        return (
-          setErrors((prev) => ({
-            ...prev,
-            [key]: inputErrors[key]
-          })),
-          toast(errorMassage)
-        );
-      }
-      toast(successMassage);
+        setData((prev) => ({
+          ...prev,
+          [key]: checkProps(values, key, 'id')
+            ? [...(prev[key] as []), { ...values[key], id: uniqueid() }]
+            : { ...prev[key], ...values[key] }
+        }));
 
-      setErrors({
-        contact: {},
-        experience: {},
-        projects: {},
-        education: {},
-        testimonials: {},
-        coursework: {},
-        involvement: {},
-        skills: {},
-        summary: {},
-        finished: {}
-      });
+        if (checkProps(values, key, 'id')) {
+          setValues((prev) => ({ ...prev, [key]: { ...prev[key], ...reset[key] } }));
+        }
+      };
+    },
+    [reset, setData, setValues, values]
+  );
 
-      setData((prev) => ({
-        ...prev,
-        [key]: checkProps(values, key, 'id')
-          ? [...(prev[key] as []), { ...values[key], id: uniqueid() }]
-          : { ...prev[key], ...values[key] }
-      }));
+  const handleDeleteItem = useCallback(
+    (_data: DataType, key: keyof DataType, _id: string) => {
+      return () => {
+        setData((prev) => ({
+          ...prev,
+          [key]: [...(_data[key] as [])].filter(({ id }) => id !== _id)
+        }));
+      };
+    },
+    [setData]
+  );
 
-      if (checkProps(values, key, 'id')) {
-        setValues((prev) => ({ ...prev, [key]: { ...prev[key], ...reset[key] } }));
-      }
-    };
-  };
+  const handleEditItem = useCallback(
+    (_data: DataType, key: keyof DataType, _id: string) => {
+      const findIndex = (_data[key] as []).findIndex(({ id }) => id === _id);
+      const filterData = { ...(_data[key] as []) }[findIndex];
 
-  const handleDeleteItem = (_data: DataType, key: keyof DataType, _id: string) => {
-    return () => {
-      setData((prev) => ({
-        ...prev,
-        [key]: [...(_data[key] as [])].filter(({ id }) => id !== _id)
-      }));
-    };
-  };
-
-  const handleEditItem = (_data: DataType, key: keyof DataType, _id: string) => {
-    const findIndex = (_data[key] as []).findIndex(({ id }) => id === _id);
-    const filterData = { ...(_data[key] as []) }[findIndex];
-
-    return () => {
-      setValues((prev) => ({ ...prev, [key]: filterData }));
-      handleDeleteItem(_data, key, _id)();
-    };
-  };
+      return () => {
+        setValues((prev) => ({ ...prev, [key]: filterData }));
+        handleDeleteItem(_data, key, _id)();
+      };
+    },
+    [handleDeleteItem, setValues]
+  );
 
   const handleSetStep = (index: number) => {
     return (e: { preventDefault: () => void }) => {
