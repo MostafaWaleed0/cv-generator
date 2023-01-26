@@ -14,10 +14,10 @@ const ItemsList: React.FC<Props> = ({ title, handleEdit, handleDelete }) => (
       </div>
     </div>
     <div className="flex justify-start gap-4">
-      <button onClick={handleDelete} className="p-2 rounded-sm bg-pink-400">
+      <button onClick={handleDelete} className="p-2 rounded bg-pink-500 text-base-0">
         delete
       </button>
-      <button onClick={handleEdit} className="p-2 rounded-sm bg-pink-400">
+      <button onClick={handleEdit} className="p-2 rounded bg-pink-500 text-base-0">
         Edit
       </button>
     </div>
