@@ -16,7 +16,7 @@ const Skills: React.FC<FormType<'skills'>> = ({ values, errors, handleChange, ha
         placeholder="Soft Skills: Leadership, Teamwork, Time Management"
       />
       <button
-        onClick={(e) => handleSubmit(e, 'skills')}
+        onClick={handleSubmit}
         type="submit"
         className="flex items-center justify-center w-full bg-base-0 py-3 px-4 rounded border-4 border-base-450 focus-visible:border-base-700 hover:border-base-700 transition-all uppercase"
       >

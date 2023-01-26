@@ -20,12 +20,14 @@ const GeneratorsList: React.FC<Props> = ({ data, title }) => {
     )
   );
 
+  const handleOnBlur = (e: { target: { innerHTML: string } }) => {
+    setTitles((prev: { [x: string]: string }) => ({ ...prev, [title]: e.target.innerHTML }));
+  };
+
   return Array.isArray(data[title]) && data[title].length ? (
     <section className={title}>
       <h2
-        onBlur={(e) =>
-          setTitles((prev: { [x: string]: string }) => ({ ...prev, [title]: e.target.innerHTML }))
-        }
+        onBlur={handleOnBlur}
         contentEditable={true}
         suppressContentEditableWarning={true}
         spellCheck={true}

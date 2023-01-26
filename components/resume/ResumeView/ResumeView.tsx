@@ -86,7 +86,8 @@ const ResumeView: React.FC = () => {
     },
     summary: {
       summary: ''
-    }
+    },
+    finished: {}
   });
   const reset: ResumeViewType = {
     contact: {
@@ -156,7 +157,8 @@ const ResumeView: React.FC = () => {
     },
     summary: {
       summary: ''
-    }
+    },
+    finished: {}
   };
   const [errors, setErrors] = useState<ErrorsType>({
     contact: {},
@@ -167,7 +169,8 @@ const ResumeView: React.FC = () => {
     coursework: {},
     involvement: {},
     skills: {},
-    summary: {}
+    summary: {},
+    finished: {}
   });
   const [step, setStep] = useLocalStorage('step', 0);
   const [data, setData] = useLocalStorage<DataType>('data', {
@@ -179,7 +182,8 @@ const ResumeView: React.FC = () => {
     coursework: [],
     involvement: [],
     skills: [],
-    summary: {}
+    summary: {},
+    finished: {}
   });
 
   const handleChange = (key: keyof ResumeViewType) => {
@@ -195,59 +199,74 @@ const ResumeView: React.FC = () => {
     };
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }, key: keyof ResumeViewType) => {
-    e.preventDefault();
-    const inputErrors = validate(values);
-    const successMassage = 'Your information is saved 😀';
+  const handleSubmit = (key: keyof ResumeViewType) => {
+    return (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+      const inputErrors = validate(values);
+      const successMassage = 'Your information is saved 😀';
 
-    if (checkErrors(inputErrors, key)) {
-      const errorMassage = '❌ Error: The required input must be filled in';
-      return (
-        setErrors((prev) => ({
-          ...prev,
-          [key]: inputErrors[key]
-        })),
-        toast(errorMassage)
-      );
-    }
-    toast(successMassage);
+      if (checkErrors(inputErrors, key)) {
+        const errorMassage = '❌ Error: The required input must be filled in';
+        return (
+          setErrors((prev) => ({
+            ...prev,
+            [key]: inputErrors[key]
+          })),
+          toast(errorMassage)
+        );
+      }
+      toast(successMassage);
 
-    setErrors({
-      contact: {},
-      experience: {},
-      projects: {},
-      education: {},
-      testimonials: {},
-      coursework: {},
-      involvement: {},
-      skills: {},
-      summary: {}
-    });
+      setErrors({
+        contact: {},
+        experience: {},
+        projects: {},
+        education: {},
+        testimonials: {},
+        coursework: {},
+        involvement: {},
+        skills: {},
+        summary: {},
+        finished: {}
+      });
 
-    setData((prev) => ({
-      ...prev,
-      [key]: checkProps(values, key, 'id')
-        ? [...(prev[key] as []), { ...values[key], id: uniqueid() }]
-        : { ...prev[key], ...values[key] }
-    }));
+      setData((prev) => ({
+        ...prev,
+        [key]: checkProps(values, key, 'id')
+          ? [...(prev[key] as []), { ...values[key], id: uniqueid() }]
+          : { ...prev[key], ...values[key] }
+      }));
 
-    checkProps(values, key, 'id')
-      ? setValues((prev) => ({ ...prev, [key]: { ...prev[key], ...reset[key] } }))
-      : null;
+      if (checkProps(values, key, 'id')) {
+        setValues((prev) => ({ ...prev, [key]: { ...prev[key], ...reset[key] } }));
+      }
+    };
   };
 
-  const handleDeleteItem = (_data: DataType, key: keyof DataType, _id: string) =>
-    setData((prev) => ({
-      ...prev,
-      [key]: [...(_data[key] as [])].filter(({ id }) => id !== _id)
-    }));
+  const handleDeleteItem = (_data: DataType, key: keyof DataType, _id: string) => {
+    return () => {
+      setData((prev) => ({
+        ...prev,
+        [key]: [...(_data[key] as [])].filter(({ id }) => id !== _id)
+      }));
+    };
+  };
 
   const handleEditItem = (_data: DataType, key: keyof DataType, _id: string) => {
     const findIndex = (_data[key] as []).findIndex(({ id }) => id === _id);
     const filterData = { ...(_data[key] as []) }[findIndex];
 
-    setValues((prev) => ({ ...prev, [key]: filterData }));
-    handleDeleteItem(_data, key, _id);
+    return () => {
+      setValues((prev) => ({ ...prev, [key]: filterData }));
+      handleDeleteItem(_data, key, _id)();
+    };
+  };
+
+  const handleSetStep = (index: number) => {
+    return (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+      setStep(index);
+    };
   };
 
   const resumeStep = () => {
@@ -259,15 +278,15 @@ const ResumeView: React.FC = () => {
               values={values.experience}
               errors={errors.experience}
               handleChange={handleChange('experience')}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleSubmit('experience')}
             />
             <ul role="list">
               {data.experience?.map(({ id, company }) => (
                 <ItemsList
                   key={id}
                   title={company}
-                  handleDelete={() => handleDeleteItem(data, 'experience', id)}
-                  handleEdit={() => handleEditItem(data, 'experience', id)}
+                  handleDelete={handleDeleteItem(data, 'experience', id)}
+                  handleEdit={handleEditItem(data, 'experience', id)}
                 />
               ))}
             </ul>
@@ -280,7 +299,7 @@ const ResumeView: React.FC = () => {
               values={values.projects}
               errors={errors.projects}
               handleChange={handleChange('projects')}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleSubmit('projects')}
             />
             <ul role="list">
               {data.projects?.map(({ id, title }) => {
@@ -288,8 +307,8 @@ const ResumeView: React.FC = () => {
                   <ItemsList
                     key={id}
                     title={title}
-                    handleDelete={() => handleDeleteItem(data, 'projects', id)}
-                    handleEdit={() => handleEditItem(data, 'projects', id)}
+                    handleDelete={handleDeleteItem(data, 'projects', id)}
+                    handleEdit={handleEditItem(data, 'projects', id)}
                   />
                 );
               })}
@@ -303,7 +322,7 @@ const ResumeView: React.FC = () => {
               values={values.education}
               errors={errors.education}
               handleChange={handleChange('education')}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleSubmit('education')}
             />
             <ul role="list">
               {data.education?.map(({ id, qualification }) => {
@@ -311,8 +330,8 @@ const ResumeView: React.FC = () => {
                   <ItemsList
                     key={id}
                     title={qualification}
-                    handleDelete={() => handleDeleteItem(data, 'education', id)}
-                    handleEdit={() => handleEditItem(data, 'education', id)}
+                    handleDelete={handleDeleteItem(data, 'education', id)}
+                    handleEdit={handleEditItem(data, 'education', id)}
                   />
                 );
               })}
@@ -326,7 +345,7 @@ const ResumeView: React.FC = () => {
               values={values.testimonials}
               errors={errors.testimonials}
               handleChange={handleChange('testimonials')}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleSubmit('testimonials')}
             />
             <ul role="list">
               {data.testimonials?.map(({ id, name }) => {
@@ -334,8 +353,8 @@ const ResumeView: React.FC = () => {
                   <ItemsList
                     key={id}
                     title={name}
-                    handleDelete={() => handleDeleteItem(data, 'testimonials', id)}
-                    handleEdit={() => handleEditItem(data, 'testimonials', id)}
+                    handleDelete={handleDeleteItem(data, 'testimonials', id)}
+                    handleEdit={handleEditItem(data, 'testimonials', id)}
                   />
                 );
               })}
@@ -349,7 +368,7 @@ const ResumeView: React.FC = () => {
               values={values.coursework}
               errors={errors.coursework}
               handleChange={handleChange('coursework')}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleSubmit('coursework')}
             />
             <ul role="list">
               {data.coursework?.map(({ id, name }) => {
@@ -357,8 +376,8 @@ const ResumeView: React.FC = () => {
                   <ItemsList
                     key={id}
                     title={name}
-                    handleDelete={() => handleDeleteItem(data, 'coursework', id)}
-                    handleEdit={() => handleEditItem(data, 'coursework', id)}
+                    handleDelete={handleDeleteItem(data, 'coursework', id)}
+                    handleEdit={handleEditItem(data, 'coursework', id)}
                   />
                 );
               })}
@@ -372,7 +391,7 @@ const ResumeView: React.FC = () => {
               values={values.involvement}
               errors={errors.involvement}
               handleChange={handleChange('involvement')}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleSubmit('involvement')}
             />
             <ul role="list">
               {data.involvement?.map(({ id, organization }) => {
@@ -380,8 +399,8 @@ const ResumeView: React.FC = () => {
                   <ItemsList
                     key={id}
                     title={organization}
-                    handleDelete={() => handleDeleteItem(data, 'involvement', id)}
-                    handleEdit={() => handleEditItem(data, 'involvement', id)}
+                    handleDelete={handleDeleteItem(data, 'involvement', id)}
+                    handleEdit={handleEditItem(data, 'involvement', id)}
                   />
                 );
               })}
@@ -395,7 +414,7 @@ const ResumeView: React.FC = () => {
               values={values.skills}
               errors={errors.skills}
               handleChange={handleChange('skills')}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleSubmit('skills')}
             />
             <ul role="list">
               {data.skills?.map(({ id, skill }) => {
@@ -403,8 +422,8 @@ const ResumeView: React.FC = () => {
                   <ItemsList
                     key={id}
                     title={skill}
-                    handleDelete={() => handleDeleteItem(data, 'skills', id)}
-                    handleEdit={() => handleEditItem(data, 'skills', id)}
+                    handleDelete={handleDeleteItem(data, 'skills', id)}
+                    handleEdit={handleEditItem(data, 'skills', id)}
                   />
                 );
               })}
@@ -416,7 +435,7 @@ const ResumeView: React.FC = () => {
           <Summary
             values={values.summary}
             handleChange={handleChange('summary')}
-            handleSubmit={handleSubmit}
+            handleSubmit={handleSubmit('summary')}
           />
         );
       case 9:
@@ -427,7 +446,7 @@ const ResumeView: React.FC = () => {
             values={values.contact}
             errors={errors.contact}
             handleChange={handleChange('contact')}
-            handleSubmit={handleSubmit}
+            handleSubmit={handleSubmit('contact')}
           />
         );
     }
@@ -438,16 +457,11 @@ const ResumeView: React.FC = () => {
       <ul role="list" className="flex flex-wrap justify-center gap-3 uppercase mb-2">
         {Object.keys(values).map((item, index) => (
           <li key={item} className="bg-pink-500 text-base-0 py-1 px-2 rounded-md">
-            <button type="button" onClick={() => setStep(index)} className="uppercase">
+            <button type="button" onClick={handleSetStep(index)} className="uppercase">
               {item}
             </button>
           </li>
         ))}
-        <li className="bg-pink-500 text-base-0 py-1 px-2 rounded-md">
-          <button type="button" onClick={() => setStep(9)} className="uppercase">
-            finished
-          </button>
-        </li>
       </ul>
       <div className="bg-base-0 p-7 lg:p-20 rounded-lg border-2 border-base-700 overflow-hidden space-y-16 ">
         {Object.keys(values)[step]?.length ? <h2>{Object.keys(values)[step]}</h2> : ''}

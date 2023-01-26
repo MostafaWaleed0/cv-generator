@@ -60,7 +60,7 @@ const Involvement: React.FC<FormType<'involvement'>> = ({
         placeholder="Participate in forums and discussions presented by leading thinkers and philosophers associated with the university."
       />
       <button
-        onClick={(e) => handleSubmit(e, 'involvement')}
+        onClick={handleSubmit}
         type="submit"
         className="flex items-center justify-center w-full bg-base-0 py-3 px-4 rounded border-4 border-base-450 focus-visible:border-base-700 hover:border-base-700 transition-all uppercase"
       >
