@@ -31,6 +31,8 @@ const GeneratorsList: React.FC<Props> = ({ data, title }) => {
         contentEditable={true}
         suppressContentEditableWarning={true}
         spellCheck={true}
+        role="presentation"
+        tabIndex={0}
       >
         {titles[title]}
       </h2>
