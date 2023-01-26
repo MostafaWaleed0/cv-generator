@@ -60,7 +60,7 @@ const Education: React.FC<FormType<'education'>> = ({
         />
       </div>
       <button
-        onClick={(e) => handleSubmit(e, 'education')}
+        onClick={handleSubmit}
         type="submit"
         className="flex items-center justify-center w-full bg-base-0 py-3 px-4 rounded border-4 border-base-450 focus-visible:border-base-700 hover:border-base-700 transition-all uppercase"
       >

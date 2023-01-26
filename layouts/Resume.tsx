@@ -30,6 +30,8 @@ const Resume: React.FC<Props> = ({ data }) => {
     }));
   };
 
+  const handleIcons = () => setIcons((x) => !x);
+
   useEffect(() => {
     const svgs = document.querySelectorAll('.cv svg');
     svgs.forEach((svg: any) =>
@@ -49,7 +51,7 @@ const Resume: React.FC<Props> = ({ data }) => {
           id="icons"
           type="checkbox"
           checked={isIcons}
-          onChange={() => setIcons((x) => !x)}
+          onChange={handleIcons}
           label="show icons?"
           className="accent-pink-500 w-5 h-5 mx-auto mt-2"
         />

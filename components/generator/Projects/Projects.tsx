@@ -51,7 +51,7 @@ const Projects: React.FC<FormType<'projects'>> = ({
         placeholder="Volunteered to help renovate a house and managed a team of 6."
       />
       <button
-        onClick={(e) => handleSubmit(e, 'projects')}
+        onClick={handleSubmit}
         type="submit"
         className="flex items-center justify-center w-full bg-base-0 py-3 px-4 rounded border-4 border-base-450 focus-visible:border-base-700 hover:border-base-700 transition-all uppercase"
       >

@@ -28,7 +28,8 @@ export const validate = ({
     coursework: {},
     involvement: {},
     skills: {},
-    summary: {}
+    summary: {},
+    finished: {}
   };
 
   if (checkInput(contact.name)) {
