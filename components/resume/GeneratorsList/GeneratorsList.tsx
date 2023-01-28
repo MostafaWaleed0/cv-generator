@@ -40,8 +40,8 @@ const GeneratorsList: React.FC<Props> = ({ data, title }) => {
         {data[title].map((items: { [x: string]: string }) => (
           <li key={items['id']} className="item">
             {Object.keys(items).map((key) => {
-              if (key !== 'id')
-                return key === 'start_time' ? (
+              return key !== 'id' ? (
+                key === 'start_time' ? (
                   <Text check={items['start_time']}>
                     <span className="time">
                       {items['start_time']} {' - '}
@@ -57,7 +57,8 @@ const GeneratorsList: React.FC<Props> = ({ data, title }) => {
                       }}
                     ></span>
                   </Text>
-                ) : null;
+                ) : null
+              ) : null;
             })}
           </li>
         ))}
