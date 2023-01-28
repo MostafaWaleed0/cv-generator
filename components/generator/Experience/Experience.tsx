@@ -32,6 +32,7 @@ const Experience: React.FC<FormType<'experience'>> = ({
         />
         <RangeMonth
           startTime={values.start_time}
+          endTime={values.end_time}
           handleChange={handleChange}
           firstLabel="When did you start working with the company?"
           lastLabel="When did you finish working with the company?"

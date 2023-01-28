@@ -79,7 +79,7 @@ const Resume: React.FC<Props> = ({ data }) => {
         />
       </header>
       <div className="flex justify-center w-full min-w-auto max-w-[1069px] mx-auto origin-[center_top] mb-[5.4rem] rounded-md scale-[.4] md:scale-[.7] lg:scale-100">
-        <div className="w-[calc(26cm+4rem)] border-[2rem] w-base-0">
+        <div className="min-w-[calc(13cm+4rem)] border-[2rem] w-base-0">
           <div className="min-h-[3.2in]  rounded-md">
             <div>
               <div className="cv" ref={cvRef} style={styles}>
@@ -97,7 +97,9 @@ const Resume: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
-      <button onClick={handlePrint}>Print this out!</button>
+      <button type="submit" onClick={handlePrint}>
+        Print this out!
+      </button>
     </div>
   );
 };

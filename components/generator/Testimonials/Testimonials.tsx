@@ -39,6 +39,7 @@ const Testimonials: React.FC<FormType<'testimonials'>> = ({
           options={{
             year: 'numeric'
           }}
+          value={values.time}
         />
       </div>
       <FormTextArea
