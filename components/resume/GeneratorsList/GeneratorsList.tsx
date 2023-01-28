@@ -44,8 +44,9 @@ const GeneratorsList: React.FC<Props> = ({ data, title }) => {
                 key === 'start_time' ? (
                   <Text check={items['start_time']}>
                     <span className="time">
-                      {items['start_time']} {' - '}
-                      {items['end_time']}
+                      {items['end_time']
+                        ? `${items['start_time']} - ${items['end_time']}`
+                        : items['start_time']}
                     </span>
                   </Text>
                 ) : key !== 'end_time' ? (
