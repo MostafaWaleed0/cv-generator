@@ -39,6 +39,7 @@ const Education: React.FC<FormType<'education'>> = ({
           options={{
             year: 'numeric'
           }}
+          value={values.time}
         />
         <FormInput
           value={values.location}
