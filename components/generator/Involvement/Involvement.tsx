@@ -32,6 +32,7 @@ const Involvement: React.FC<FormType<'involvement'>> = ({
         />
         <RangeMonth
           startTime={values.start_time}
+          endTime={values.end_time}
           handleChange={handleChange}
           firstLabel="When did you start working with the organization?"
           lastLabel="When did you take the course?"

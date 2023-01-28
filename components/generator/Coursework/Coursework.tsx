@@ -39,6 +39,7 @@ const Coursework: React.FC<FormType<'coursework'>> = ({
           options={{
             year: 'numeric'
           }}
+          value={values.time}
         />
         <FormInput
           value={values.skill}

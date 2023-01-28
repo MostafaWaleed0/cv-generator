@@ -32,6 +32,7 @@ const Projects: React.FC<FormType<'projects'>> = ({
         />
         <RangeMonth
           startTime={values.start_time}
+          endTime={values.end_time}
           handleChange={handleChange}
           firstLabel="When did you start working on the project?"
           lastLabel="When did you finish working on the project?"
