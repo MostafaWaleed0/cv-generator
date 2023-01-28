@@ -18,7 +18,7 @@ const Projects: React.FC<FormType<'projects'>> = ({
           require={true}
           onChange={handleChange}
           placeholder="Volunteer"
-          error={Boolean(errors?.title)}
+          error={!!errors?.title}
           errorMessage={errors?.title ? errors?.title : ''}
         />
         <FormInput

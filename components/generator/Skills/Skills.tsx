@@ -11,7 +11,7 @@ const Skills: React.FC<FormType<'skills'>> = ({ values, errors, handleChange, ha
         label="add your skills"
         require={true}
         onChange={handleChange}
-        error={Boolean(errors?.skill)}
+        error={!!errors?.skill}
         errorMessage={errors?.skill ? errors?.skill : ''}
         placeholder="Soft Skills: Leadership, Teamwork, Time Management"
       />

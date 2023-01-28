@@ -13,7 +13,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           require={true}
           onChange={handleChange}
           placeholder="Anton Larsson"
-          error={Boolean(errors?.name)}
+          error={!!errors?.name}
           errorMessage={errors?.name ? errors?.name : ''}
         />
         <FormInput
@@ -24,7 +24,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           require={true}
           onChange={handleChange}
           placeholder="Journalistic"
-          error={Boolean(errors?.job)}
+          error={!!errors?.job}
           errorMessage={errors?.job ? errors?.job : ''}
         />
         <FormInput
@@ -35,7 +35,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           require={true}
           onChange={handleChange}
           placeholder="antonlarsson@po.edu"
-          error={Boolean(errors?.email)}
+          error={!!errors?.email}
           errorMessage={errors?.email ? errors?.email : ''}
         />
         <FormInput
@@ -46,7 +46,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           require={true}
           onChange={handleChange}
           placeholder="(621) 799-5548"
-          error={Boolean(errors?.phone)}
+          error={!!errors?.phone}
           errorMessage={errors?.phone ? errors?.phone : ''}
         />
         <FormInput
@@ -57,7 +57,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           require={false}
           onChange={handleChange}
           placeholder="https://antonlarsson.com"
-          error={Boolean(errors?.website)}
+          error={!!errors?.website}
           errorMessage={errors?.website ? errors?.website : ''}
         />
         <FormInput

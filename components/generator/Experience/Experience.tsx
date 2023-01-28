@@ -27,7 +27,7 @@ const Experience: React.FC<FormType<'experience'>> = ({
           require={true}
           onChange={handleChange}
           placeholder="Washington Post"
-          error={Boolean(errors?.company)}
+          error={!!errors?.company}
           errorMessage={errors?.company ? errors?.company : ''}
         />
         <RangeMonth
