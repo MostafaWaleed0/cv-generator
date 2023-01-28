@@ -97,7 +97,9 @@ const Resume: React.FC<Props> = ({ data }) => {
           </div>
         </div>
       </div>
-      <button onClick={handlePrint}>Print this out!</button>
+      <button type="submit" onClick={handlePrint}>
+        Print this out!
+      </button>
     </div>
   );
 };
