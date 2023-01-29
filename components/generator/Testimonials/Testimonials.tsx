@@ -17,7 +17,7 @@ const Testimonials: React.FC<FormType<'testimonials'>> = ({
           label="What is the name of the certificate?"
           require={true}
           onChange={handleChange}
-          error={!!errors?.name}
+          error={Boolean(errors?.name)}
           errorMessage={errors?.name ? errors?.name : ''}
           placeholder="Project Management Professional (PMP)"
         />
