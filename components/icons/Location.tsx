@@ -6,7 +6,7 @@ const Location = (props: SVGProps<SVGSVGElement>) => (
     width="1em"
     height="1em"
     fill="currentColor"
-    aria-hidden={true}
+    aria-hidden
     focusable={false}
     {...props}
   >

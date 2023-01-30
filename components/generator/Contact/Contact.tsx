@@ -10,10 +10,10 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           type="text"
           id="name"
           label="full name"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="Anton Larsson"
-          error={!!errors?.name}
+          error={Boolean(errors?.name)}
           errorMessage={errors?.name ? errors?.name : ''}
         />
         <FormInput
@@ -21,10 +21,10 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           type="text"
           id="job"
           label="job title"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="Journalistic"
-          error={!!errors?.job}
+          error={Boolean(errors?.job)}
           errorMessage={errors?.job ? errors?.job : ''}
         />
         <FormInput
@@ -32,10 +32,10 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           type="text"
           id="email"
           label="email address"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="antonlarsson@po.edu"
-          error={!!errors?.email}
+          error={Boolean(errors?.email)}
           errorMessage={errors?.email ? errors?.email : ''}
         />
         <FormInput
@@ -43,10 +43,10 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           type="text"
           id="phone"
           label="phone number"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="(621) 799-5548"
-          error={!!errors?.phone}
+          error={Boolean(errors?.phone)}
           errorMessage={errors?.phone ? errors?.phone : ''}
         />
         <FormInput
@@ -57,7 +57,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           require={false}
           onChange={handleChange}
           placeholder="https://antonlarsson.com"
-          error={!!errors?.website}
+          error={Boolean(errors?.website)}
           errorMessage={errors?.website ? errors?.website : ''}
         />
         <FormInput
