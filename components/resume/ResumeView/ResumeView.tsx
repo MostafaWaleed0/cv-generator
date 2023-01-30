@@ -492,7 +492,7 @@ const ResumeView: React.FC = () => {
         containerStyle={{}}
         toastOptions={{
           className: 'min-w-fit w-[30rem] h-20',
-          duration: 3000
+          duration: 1500
         }}
       >
         {(t) => (
