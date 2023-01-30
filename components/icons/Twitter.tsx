@@ -6,7 +6,7 @@ const Twitter = (props: SVGProps<SVGSVGElement>) => (
     width={24}
     height={24}
     fill="#1DA1F2"
-    aria-hidden={true}
+    aria-hidden
     focusable={false}
     viewBox="0 0 16 16"
     {...props}

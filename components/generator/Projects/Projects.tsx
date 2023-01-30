@@ -15,7 +15,7 @@ const Projects: React.FC<FormType<'projects'>> = ({
           type="text"
           id="title"
           label="project title"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="Volunteer"
           error={Boolean(errors?.title)}

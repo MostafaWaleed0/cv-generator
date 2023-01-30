@@ -15,7 +15,7 @@ const Coursework: React.FC<FormType<'coursework'>> = ({
           type="text"
           id="name"
           label="What is the course name?"
-          require={true}
+          require
           onChange={handleChange}
           error={Boolean(errors?.name)}
           errorMessage={errors?.name ? errors?.name : ''}

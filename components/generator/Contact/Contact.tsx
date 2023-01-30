@@ -10,7 +10,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           type="text"
           id="name"
           label="full name"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="Anton Larsson"
           error={Boolean(errors?.name)}
@@ -21,7 +21,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           type="text"
           id="job"
           label="job title"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="Journalistic"
           error={Boolean(errors?.job)}
@@ -32,7 +32,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           type="text"
           id="email"
           label="email address"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="antonlarsson@po.edu"
           error={Boolean(errors?.email)}
@@ -43,7 +43,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
           type="text"
           id="phone"
           label="phone number"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="(621) 799-5548"
           error={Boolean(errors?.phone)}
