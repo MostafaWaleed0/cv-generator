@@ -5,7 +5,7 @@ const Logo = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 370 438.4259545426984"
     width={45}
     height={45}
-    aria-hidden={true}
+    aria-hidden
     focusable={false}
     {...props}
   >

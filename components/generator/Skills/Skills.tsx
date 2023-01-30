@@ -9,7 +9,7 @@ const Skills: React.FC<FormType<'skills'>> = ({ values, errors, handleChange, ha
         type="text"
         id="skill"
         label="add your skills"
-        require={true}
+        require
         onChange={handleChange}
         error={Boolean(errors?.skill)}
         errorMessage={errors?.skill ? errors?.skill : ''}
