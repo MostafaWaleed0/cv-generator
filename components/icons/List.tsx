@@ -7,7 +7,7 @@ const List = (props: SVGProps<SVGSVGElement>) => (
     height={24}
     fill="currentColor"
     viewBox="0 0 16 16"
-    aria-hidden={true}
+    aria-hidden
     focusable={false}
     {...props}
   >

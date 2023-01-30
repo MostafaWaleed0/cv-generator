@@ -24,7 +24,7 @@ const Experience: React.FC<FormType<'experience'>> = ({
           type="text"
           id="company"
           label="For which company did you work?"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="Washington Post"
           error={Boolean(errors?.company)}

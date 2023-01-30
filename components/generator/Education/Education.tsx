@@ -15,7 +15,7 @@ const Education: React.FC<FormType<'education'>> = ({
           type="text"
           id="qualification"
           label="what is your degree?"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="Bachelor of Arts in English Language and Literature"
           error={Boolean(errors?.qualification)}

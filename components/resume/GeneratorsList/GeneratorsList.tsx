@@ -28,9 +28,9 @@ const GeneratorsList: React.FC<Props> = ({ data, title }) => {
     <section className={title}>
       <h2
         onBlur={handleOnBlur}
-        contentEditable={true}
-        suppressContentEditableWarning={true}
-        spellCheck={true}
+        contentEditable
+        suppressContentEditableWarning
+        spellCheck
         role="presentation"
         tabIndex={0}
       >

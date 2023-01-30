@@ -15,7 +15,7 @@ const Testimonials: React.FC<FormType<'testimonials'>> = ({
           type="text"
           id="name"
           label="What is the name of the certificate?"
-          require={true}
+          require
           onChange={handleChange}
           error={Boolean(errors?.name)}
           errorMessage={errors?.name ? errors?.name : ''}

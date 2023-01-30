@@ -24,7 +24,7 @@ const Involvement: React.FC<FormType<'involvement'>> = ({
           type="text"
           id="organization"
           label="What organization did you work for?"
-          require={true}
+          require
           onChange={handleChange}
           placeholder="Literature Student Association"
           error={Boolean(errors?.organization)}

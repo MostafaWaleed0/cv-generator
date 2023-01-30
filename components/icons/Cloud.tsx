@@ -6,7 +6,7 @@ const Cloud = (props: SVGProps<SVGSVGElement>) => (
     width="1.5em"
     height="1.5em"
     fill="currentColor"
-    aria-hidden={true}
+    aria-hidden
     focusable={false}
     {...props}
   >
