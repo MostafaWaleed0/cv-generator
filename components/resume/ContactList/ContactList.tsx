@@ -1,18 +1,20 @@
 import { Cloud, Email, Linkedin, Location, Phone } from 'components/icons';
 import { DataType } from 'lib/types';
+import Image from 'next/image';
 
 type Props = {
   contact: DataType['contact'];
 };
 
 const ContactList: React.FC<Props> = ({
-  contact: { name, job, email, phone, linkedin, city, state, country, website }
+  contact: { name, job, email, phone, linkedin, city, state, country, website, image }
 }) => {
   const [checkLinkedin, checkWebsite] = [linkedin?.length, website?.length];
   const address = (): string => [city, state, country].filter((x) => x).join(', ');
 
   return (
-    <>
+    <div>
+      {image && <Image src={image} width={170} height={170} alt={name || ''} />}
       {name ? (
         <section className="contact">
           <h1>{name}</h1>
@@ -48,7 +50,7 @@ const ContactList: React.FC<Props> = ({
           </ul>
         </section>
       ) : null}
-    </>
+    </div>
   );
 };
 

@@ -33,12 +33,21 @@
   @apply text-[1em];
 }
 
+/* header */
+.cv .header img {
+  @apply rounded-full h-[14em] w-[14em] object-cover;
+}
+
 /* item  */
 .cv .item {
   @apply mb-[0.8em] leading-tight;
 }
 
 /* contact  */
+.cv .contact {
+  @apply mt-[1.5em];
+}
+
 .cv .contact h2 {
   @apply border-none mt-1 normal-case;
 }
