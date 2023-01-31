@@ -21,6 +21,7 @@ const ResumeView: React.FC = () => {
   const [values, setValues] = useLocalStorage<ResumeViewType>('values', {
     contact: {
       name: '',
+      image: '',
       email: '',
       phone: '',
       job: '',
@@ -94,6 +95,7 @@ const ResumeView: React.FC = () => {
       contact: {
         name: '',
         email: '',
+        image: '',
         phone: '',
         job: '',
         country: '',

@@ -3,6 +3,7 @@ export type ResumeViewType = {
   contact: {
     name: string;
     email: string;
+    image: string;
     phone: string;
     job: string;
     country: string;
