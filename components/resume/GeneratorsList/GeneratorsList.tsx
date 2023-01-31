@@ -34,7 +34,7 @@ const GeneratorsList: React.FC<Props> = ({ data, title }) => {
         role="presentation"
         tabIndex={0}
       >
-        {titles[title]}
+        {titles[title].replaceAll('&nbsp;', '')}
       </h2>
       <ul role="list">
         {data[title].map((items: { [x: string]: string }) => (
