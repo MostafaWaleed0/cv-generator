@@ -18,8 +18,7 @@ const Education: React.FC<FormType<'education'>> = ({
           require
           onChange={handleChange}
           placeholder="Bachelor of Arts in English Language and Literature"
-          error={Boolean(errors?.qualification)}
-          errorMessage={errors?.qualification ? errors?.qualification : ''}
+          error={errors?.qualification}
         />
         <FormInput
           value={values.institution}
