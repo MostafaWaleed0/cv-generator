@@ -27,8 +27,7 @@ const Involvement: React.FC<FormType<'involvement'>> = ({
           require
           onChange={handleChange}
           placeholder="Literature Student Association"
-          error={Boolean(errors?.organization)}
-          errorMessage={errors?.organization ? errors?.organization : ''}
+          error={errors?.organization}
         />
         <RangeMonth
           startTime={values.start_time}
