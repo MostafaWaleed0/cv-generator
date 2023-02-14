@@ -54,7 +54,7 @@ const GeneratorsList: React.FC<Props> = ({ data, title }) => {
                     <span
                       className={key.replaceAll('_', '-')}
                       dangerouslySetInnerHTML={{
-                        __html: sanitizer(items[key].replace(/\n/i, '<br />'))
+                        __html: sanitizer(items[key].replaceAll(/\n/i, '<br />'))
                       }}
                     ></span>
                   </Text>
