@@ -5,8 +5,7 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   [x: string]: any;
   id: string;
   label: string;
-  error?: boolean;
-  errorMessage?: string;
+  error?: string;
   variablePropName?: string;
   variablePropValue?: string;
 }
@@ -14,14 +13,14 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 const FormTextArea: React.FC<Props> = ({
   id,
   label,
-  error = false,
+  error,
   require,
-  errorMessage = '',
   variablePropName = `aria-describedby`,
   variablePropValue = `${id}_error`,
   ...props
 }) => {
   const variableAttribute = { [variablePropName]: variablePropValue };
+  const booleanError = Boolean(error);
 
   return (
     <div>
@@ -34,9 +33,9 @@ const FormTextArea: React.FC<Props> = ({
         spellCheck="false"
         autoComplete="off"
         className="mt-1 p-2 border-2 border-base-500 w-full outline-none focus:border-base-900"
-        {...(error ? variableAttribute : '')}
+        {...(booleanError ? variableAttribute : '')}
       ></textarea>
-      <FormError error={error} id={id} errorMessage={errorMessage} />
+      <FormError error={booleanError} id={id} errorMessage={error ? error : ''} />
     </div>
   );
 };

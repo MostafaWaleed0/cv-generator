@@ -1,7 +1,20 @@
 import { ErrorsType, ResumeViewType } from 'lib/types';
 
+/**
+ * Checks if a string is empty or only contains whitespace.
+ *
+ * @param {string} validate - The string to validate.
+ * @returns {boolean} True if the string is empty or only contains whitespace; false otherwise.
+ */
 const checkInput = (validate: string) => !validate || validate.trim() === '';
 
+/**
+ * Tests a string against a regular expression.
+ *
+ * @param {RegExp} reg - The regular expression to test against.
+ * @param {string} validate - The string to test.
+ * @returns {boolean} True if the string does not match the regular expression; false otherwise.
+ */
 const testInput = (reg: RegExp, validate: string) => !reg.test(validate);
 
 export const validate = ({

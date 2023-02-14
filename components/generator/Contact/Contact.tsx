@@ -85,8 +85,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
             require
             onChange={handleChange}
             placeholder="Anton Larsson"
-            error={Boolean(errors?.name)}
-            errorMessage={errors?.name ? errors?.name : ''}
+            error={errors?.name}
           />
           <FormInput
             value={values.job}
@@ -96,8 +95,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
             require
             onChange={handleChange}
             placeholder="Journalistic"
-            error={Boolean(errors?.job)}
-            errorMessage={errors?.job ? errors?.job : ''}
+            error={errors?.job}
           />
           <FormInput
             value={values.email}
@@ -107,8 +105,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
             require
             onChange={handleChange}
             placeholder="antonlarsson@po.edu"
-            error={Boolean(errors?.email)}
-            errorMessage={errors?.email ? errors?.email : ''}
+            error={errors?.email}
           />
           <FormInput
             value={values.phone}
@@ -118,8 +115,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
             require
             onChange={handleChange}
             placeholder="(621) 799-5548"
-            error={Boolean(errors?.phone)}
-            errorMessage={errors?.phone ? errors?.phone : ''}
+            error={errors?.phone}
           />
           <FormInput
             value={values.website}
@@ -129,8 +125,7 @@ const Contact: React.FC<FormType<'contact'>> = ({ values, errors, handleChange, 
             require={false}
             onChange={handleChange}
             placeholder="https://antonlarsson.com"
-            error={Boolean(errors?.website)}
-            errorMessage={errors?.website ? errors?.website : ''}
+            error={errors?.website}
           />
           <FormInput
             value={values.linkedin}
